@@ -27,14 +27,14 @@ function initAll()
     }
             NUM_OF_SOUNDS = 8;
            
-            urls = ['./sounds/helsinki/1.mp3',
-                    './sounds/helsinki/2.mp3',
-                    './sounds/helsinki/3.mp3',
-                    './sounds/helsinki/4.mp3',
-                    './sounds/helsinki/5.mp3',
-                    './sounds/helsinki/7.mp3',
-                    './sounds/helsinki/8.mp3',
-                    './sounds/helsinki/9.mp3'];
+            urls = ['./sounds/helsinki/01.mp3',
+                    './sounds/helsinki/02.mp3',
+                    './sounds/helsinki/03.mp3',
+                    './sounds/helsinki/04.mp3',
+                    './sounds/helsinki/05.mp3',
+                    './sounds/helsinki/07.mp3',
+                    './sounds/helsinki/08.mp3',
+                    './sounds/helsinki/09.mp3'];
     
     analyser = context.createAnalyser();
     console.log("inited");
