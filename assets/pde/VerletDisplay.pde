@@ -36,6 +36,8 @@ class VerletDisplay
   Vec2D mousePos;
   AttractionBehavior mouseAttractor;
 
+  PFont labelFont;
+
   //  all distances from selected node
   String str2return = "";
   Float[] tmpDistances = new String[NUMBER_OF_NODES];
@@ -44,15 +46,26 @@ class VerletDisplay
   String[] londonLabels = new String[NUMBER_OF_NODES]; // names for labels
   int[] londonBg = new int[NUMBER_OF_NODES];        // background width for labels
 
-  // store london info in arrays
+  // store helsinki info in arrays
   String[] helsinkiLabels = new String[NUMBER_OF_NODES]; // names for labels
   int[] helsinkiBg = new int[NUMBER_OF_NODES];        // background width for labels
+
+  // store london info in arrays
+  String[] budapestLabels = new String[NUMBER_OF_NODES]; // names for labels
+  int[] budapestBg = new int[NUMBER_OF_NODES];        // background width for labels
+
+  // store helsinki info in arrays
+  String[] kosiceLabels = new String[NUMBER_OF_NODES]; // names for labels
+  int[] kosiceBg = new int[NUMBER_OF_NODES];        // background width for labels
  
 //---------------------------------------------------------------------------------------------------------------------------------------------    
 
   VerletDisplay() 
   {
-    //  Initialize london-specific label info
+
+    labelFont = createFont("Arial",36);
+    
+    //  London labels
 
     londonLabels[0] = "sound of a separator";
     londonLabels[1] = "a beer keg swimming on Thames";
@@ -64,17 +77,17 @@ class VerletDisplay
     londonLabels[7] = "raindrops";
     londonLabels[8] = "raindrops";
 
-    londonBg[0] = 140;
-    londonBg[1] = 190;
-    londonBg[2] = 140;
-    londonBg[3] = 170;
-    londonBg[4] = 210;
-    londonBg[5] = 140;
-    londonBg[6] = 140;
-    londonBg[7] = 140;
-    londonBg[8] = 140;
+    londonBg[0] = 140*3;
+    londonBg[1] = 190*3;
+    londonBg[2] = 140*3;
+    londonBg[3] = 170*3;
+    londonBg[4] = 210*3;
+    londonBg[5] = 140*3;
+    londonBg[6] = 140*3;
+    londonBg[7] = 140*3;
+    londonBg[8] = 140*3;
 
-    //  Initialize helsinki-specific label info
+    //  Helsinki labels
 
     helsinkiLabels[0] = "chinese store at the railway station";
     helsinkiLabels[1] = "rush hour on the train";
@@ -85,15 +98,20 @@ class VerletDisplay
     helsinkiLabels[6] = "metal barrell ( near a submarine, Suomenlinna Island )";
     helsinkiLabels[7] = "escaping Viking Line ( arrivers from the ship terminal )";
     
-    helsinkiBg[0] = 200;
-    helsinkiBg[1] = 190;
-    helsinkiBg[2] = 150;
-    helsinkiBg[3] = 120;
-    helsinkiBg[4] = 210;
-    helsinkiBg[5] = 200;
-    helsinkiBg[6] = 300;
-    helsinkiBg[7] = 300;
+    helsinkiBg[0] = 200*3;
+    helsinkiBg[1] = 190*3;
+    helsinkiBg[2] = 150*3;
+    helsinkiBg[3] = 120*3;
+    helsinkiBg[4] = 210*3;
+    helsinkiBg[5] = 200*3;
+    helsinkiBg[6] = 300*3;
+    helsinkiBg[7] = 300*3;
     
+    //  Budapest labels
+    //  ...
+
+    //  Kosice labels
+    //  ...
 
     // Initialize the physics
     physics=new VerletPhysics2D();
@@ -176,12 +194,12 @@ class VerletDisplay
 
       noStroke();
       colorMode(HSB);
-      fill(i*5+100,100,100,100);
-      ellipse(p.x,p.y,25,25);
+      fill(i*10+40,155,255);
+      ellipse(p.x,p.y,40,40);
       colorMode(RGB);
 
 
-      // selected particle in cyan, all others in black
+      // selected particle 
       fill(0x99ffffff);
       stroke(p==selected ? 0xff00ffff : 0x44000000);
       ellipse(p.x,p.y,8,8);
@@ -200,8 +218,9 @@ class VerletDisplay
       // the selected particle and lock it (becomes unmovable by physics)
       if (p.distanceToSquared(mousePos)<snapDist) 
       {
-        //noStroke();
-        stroke(0x334da9d3);
+        noStroke();
+        //stroke(0x334da9d3);
+        fill(255,100);
         ellipse(p.x,p.y,60,60);
       }
     }
@@ -327,6 +346,7 @@ class VerletDisplay
     //  label positioning from node center
     int offSet = 20;
     textAlign(LEFT);
+    textFont(labelFont);
 
     for (int i=0; i< NUMBER_OF_NODES; i++)
     {
@@ -345,11 +365,12 @@ class VerletDisplay
     //  label positioning from node center
     int offSet = 20;
     textAlign(LEFT);
+    textFont(labelFont);
 
     for (int i=0; i< NUMBER_OF_NODES; i++)
     {
-      fill(60,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,helsinkiBg[i],15,5,5);
+      fill(160,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*8);
+      //rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,helsinkiBg[i],30,5,5);
       
       fill(255,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
       text(helsinkiLabels[i], nodeArray[i].x+offSet,nodeArray[i].y);

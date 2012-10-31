@@ -22,7 +22,11 @@ DataReader reader;
 VerletDisplay verletdisplay;
 Gui gui;
 
+
 int NUMBER_OF_NODES;
+
+//  0 = london, 1 = helsinki, 2 = budapest, 3 = kosice
+int LOCATION = 1; 
 
 String[] allDistances[];
 String allSplit[][];
@@ -46,6 +50,7 @@ void setup()
   //reader = new DataReader();
   verletdisplay = new VerletDisplay();
   gui = new Gui();
+  
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------    
@@ -53,6 +58,12 @@ void setup()
 void draw()
 {
   gui.showDefault();
+  gui.displayMap();
+
+  if(LOCATION==0) gui.showCityName("LONDON");
+  if(LOCATION==1) gui.showCityName("HELSINKI");
+  if(LOCATION==2) gui.showCityName("BUDAPEST");
+  if(LOCATION==3) gui.showCityName("KOSICE");
   
   if(isLoaded==0)
   {
@@ -60,14 +71,9 @@ void draw()
   }
   if(isLoaded==1)
   {
-    //gui.displayLogo();
     verletdisplay.draw();
-    gui.displayLocation();
     gui.showIntroText();
-    //  gui.displayInfo();
-    //  gui.displaySelected();
-    //  println(verletdisplay.getNodeDistances());
-
+    
     pointerPosX = mouseX;
     pointerPosY = mouseY;
 
@@ -95,7 +101,7 @@ void drawSpektra(int[] sp)
   for (int i=0; i<sp.length; i++)
   {
     fill(100,100);
-    rect(i/2+30,height-31,1,-sp[i]/4);
+    rect(width-i/2,height-31,1,-sp[i]/4);
   }
 }
 
@@ -116,6 +122,7 @@ void keyPressed()
 void mousePressed()
 {
   verletdisplay.pressed();
+  gui.pressed(mouseX,mouseY);
 }
 
 void mouseDragged()

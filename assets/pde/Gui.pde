@@ -5,15 +5,17 @@ class Gui
 {
   PImage myMap;
   int fadeOut = 255;
-  PFont cityFont;
+  PFont largeCityfont;
+  PFont smallCityfont;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------    
 
   Gui()
   {
-    myLogo = loadImage("./assets/pix/szovetsegLogo.png");
-    cityFont = createFont("Arial",48);
+    myMap = loadImage("./assets/pix/nanoMap.png")
+    largeCityfont = createFont("Arial",48);
     normalFont = createFont("Arial",11);
+    smallCityfont = createFont("Arial",9);
   }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------    
@@ -24,6 +26,8 @@ class Gui
     rect(width/2-120,height/2-15,240,25,20,20,20,20);
     fill(255);
     textAlign(CENTER);
+    textFont(normalFont);
+      
     text("please wait... the sounds are loading",width/2,height/2);
     fill(100,200);
     text(NUM_OF_SOUNDS-loadCount + " sounds are remaining...",width/2,height/2+50);
@@ -32,14 +36,20 @@ class Gui
   
   void showDefault()
   {
-      background(240);
+      background(235);
       fill(200,100);
-      textAlign(LEFT);
-      textFont(cityFont);
-      text("HELSINKI",30,40);
+      textAlign(RIGHT);
       textFont(normalFont);
       fill(100,100);
-      text("raw spectrum",30,height-15);
+      text("raw spectrum",width-30,height-15);
+  }
+
+  void showCityName(String n)
+  {   
+      textAlign(LEFT);
+      fill(255,100);
+      textFont(largeCityfont);
+      text(n,10,50); 
   }
 
   void showIntroText()
@@ -52,44 +62,80 @@ class Gui
       rect(width/2-120,height/2-15,240,25,20,20,20,20);
       fill(255,fadeOut);
       textAlign(CENTER);
+      textFont(normalFont);
+      
       text("Select a Node to hear its own sound...",width/2,height/2);
       textAlign(LEFT);
     }
   }
 
-  void displayLogo()
+  void displayMap()
   {
-    image(myLogo,20,height-150);
+    image(myMap,width-myMap.width,0);
+
+    textAlign(RIGHT);
+    textFont(normalFont);
+    text("SELECT CITY TO CHANGE LOCATION", width-30, myMap.height+15);
+
+    selectCities("BUDAPEST",width-myMap.width+185,205);
+    selectCities("KOSICE",width-myMap.width+195,190);
+    selectCities("HELSINKI",width-myMap.width+195,90);
+    selectCities("LONDON",width-myMap.width+80,170);
   }
 
-  void displayLocation()
+  void selectCities (String name, int xPos, int yPos)
   {
-    fill(255);
-      textAlign(LEFT);
-      noStroke();
-      fill(0,30);
-      rect(width-420,height-55,440,36,2,2,2,2);
-      fill(255);
-      text("All sounds have been recorded at the sites of Helsinki (Finnland)" + "\n"
-        + "in 2012, as part of the CityNoises Festival.", width-400,height-40);
-
-    fill(180);
+    rectMode(CENTER);
+    noStroke();
+    //fill(0,255-dist(mouseX,mouseY,xPos,yPos)*2);
+    //rect(xPos,yPos, 45,10);
+    fill(0,255-dist(mouseX,mouseY,xPos,yPos)*3);
+    rect(xPos,yPos, 50,10);
+    rectMode(CORNER);
     textAlign(CENTER);
-    text("Listen to the ever changing soundfield that had been created during the CityNoises festival, in London & Helsinki." + "\n" 
-      + "If two nodes are getting closer, their sounds become more audible for each other...", width/2, height-40);
+    textFont(smallCityfont);
+    stroke(255,255-dist(mouseX,mouseY,xPos,yPos)*2);
+    fill(255,255-dist(mouseX,mouseY,xPos,yPos)*2);
+    text(name,xPos,yPos+3);
+
   }
-  
-  void displayInfo()
+
+  void pressed(int xPos, int yPos)
   {
-    fill(0,100);
-    text("You jumped at:  " + reader.currentRow + " seconds within the recorded data", 10,height-30);
-    text("press 'p' to jump forward, press 'o' to jump backward", 10, height-10);
+    if(dist(mouseX,mouseY,xPos,yPos)<30)
+    {
+      if(mouseY > 200)
+      {
+        console.log("Budapest!");
+        LOCATION = 2;
+      }
+
+      if((mouseY > 185) && (mouseY < 200))
+      {
+        console.log("KOSICE!");
+        LOCATION = 3;
+      }
+
+      if((mouseY > 165) && (mouseY < 180))
+      {
+        console.log("LONDON");
+        LOCATION = 0;
+      }
+
+      if(mouseY < 100)
+      {
+        console.log("HELSINKI!");
+        LOCATION = 1;
+      }
+   }  
   }
 
   void displaySelected()
   {
     String[] nodeName = split(verletdisplay.str2return, " ");
     fill(0,100);
+    textFont(normalFont);
+      
     text("You are listening the sounds of " + nodeName[0],10,height-50);
   }
 }

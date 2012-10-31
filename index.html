@@ -109,12 +109,8 @@
   			});
   			 gui.closed = true;">
 
-		<div id="logo"><img src="./assets/pix/szovetsegLogo.png"></div>
-		<div id="titletopBg"></div>
-		<div id="titleBg"></div>
-		<div id="titleDiv">
-		</div>
-
+		
+		
 		<!-- Initial loading animation --><div id="loading"><!-- removed and placed into processingjs sketch --></div>
 		
 		</br>
@@ -159,6 +155,17 @@
 				$('#scrollDown').click(function() 
 				{
 					$.scrollTo( '#content', 900, {easing:'swing'} );	  
+				});
+
+				$('#scrollUp').click(function() 
+				{
+					$.scrollTo( '0', 900, {easing:'swing'} );	  
+				});
+			});
+		</script>
+	</body>
+</html>
+  
 				});
 
 				$('#scrollUp').click(function() 
