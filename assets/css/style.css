@@ -94,13 +94,13 @@ highlight
 
 #scrollDown:hover
 {
-    background-color:#456;
+    background-color:#395c58;
 }
 
 #scrollUp
 {
     width:10%;
-    background-color:#444;
+    background-color:#222;
     border-radius: 0px 0px 100px 100px;
     moz-border-radius:0px 0px 100px 100px;
     padding:5px 5px 0px 0px;
@@ -117,7 +117,7 @@ highlight
 
 #scrollUp:hover
 {
-    background-color:#9bf;
+    background-color:#395c58;
 }
     
 #content 

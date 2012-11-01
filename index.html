@@ -32,10 +32,17 @@
 				scale : 0.5,
 			}
 
+			//	global variables to fill up sound & other arrays
+			var NUM_OF_SOUNDS_TO_PLAY = 8;
+			var NUM_OF_SOUNDS_TO_LOAD = 34;
+
+			//	offset to select sections from sound, filter, label arrays
+			var arrayOffset = 0;
+
 			function filterController(controllerdata)
 			{
 				var n=controllerdata.split(" ");
-				setFilters(n);
+				setFilters(arrayOffset, n);
 			}
 
 			function finishLoad() 
@@ -53,9 +60,12 @@
   				}
 
   				//  start sounds  
-  				for(var i=0; i<NUM_OF_SOUNDS; i++)
+  				for(var i=0; i<NUM_OF_SOUNDS_TO_PLAY; i++)
   				{
-  					playSound();
+  					//	prepare
+  					loadSounds();
+  					//	play from offset in the array
+  					playSounds(arrayOffset);
   				}
   			}
 
@@ -92,7 +102,7 @@
 		</script>
 	</head>
 
-	<body onload="initAll();for(var i=0;i<NUM_OF_SOUNDS;i++){loadSoundFile(i);} var gui = new dat.GUI();
+	<body onload="initAll();for(var i=0;i<NUM_OF_SOUNDS_TO_LOAD;i++){loadSoundFiles(i);} var gui = new dat.GUI();
 			{
  			 height : 5 * 32 - 1;
  			}
@@ -160,17 +170,6 @@
 				$('#scrollUp').click(function() 
 				{
 					$.scrollTo( '0', 900, {easing:'swing'} );	  
-				});
-			});
-		</script>
-	</body>
-</html>
-  
-				});
-
-				$('#scrollUp').click(function() 
-				{
-					$.scrollTo( '#titleBg', 900, {easing:'swing'} );	  
 				});
 			});
 		</script>

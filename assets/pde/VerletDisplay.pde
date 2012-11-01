@@ -24,7 +24,7 @@ class VerletDisplay
   float snapDist=20*20;
   
   //  create an array for nodes (particles)
-  VerletParticle2d[] nodeArray = new VerletParticle2d[NUMBER_OF_NODES];
+  VerletParticle2d[] nodeArray = new VerletParticle2d[MAX_NUMBER_OF_NODES];
  
   //rigidity (strength of connections)
   float str = params.strength;
@@ -40,9 +40,14 @@ class VerletDisplay
 
   //  all distances from selected node
   String str2return = "";
-  Float[] tmpDistances = new String[NUMBER_OF_NODES];
+  Float[] tmpDistances = new String[MAX_NUMBER_OF_NODES];
 
-  // store london info in arrays
+  // store info for labels
+  
+  String[] textLabels = new String[NUM_OF_SOUNDS_TO_LOAD];
+  int[] textLabelsBg = new int[NUM_OF_SOUNDS_TO_LOAD];
+
+  /*
   String[] londonLabels = new String[NUMBER_OF_NODES]; // names for labels
   int[] londonBg = new int[NUMBER_OF_NODES];        // background width for labels
 
@@ -57,6 +62,8 @@ class VerletDisplay
   // store helsinki info in arrays
   String[] kosiceLabels = new String[NUMBER_OF_NODES]; // names for labels
   int[] kosiceBg = new int[NUMBER_OF_NODES];        // background width for labels
+  */
+
  
 //---------------------------------------------------------------------------------------------------------------------------------------------    
 
@@ -67,51 +74,88 @@ class VerletDisplay
     
     //  London labels
 
-    londonLabels[0] = "sound of a separator";
-    londonLabels[1] = "a beer keg swimming on Thames";
-    londonLabels[2] = "sound of a chain";
-    londonLabels[3] = "jumping on metal surfaces";
-    londonLabels[4] = "pedestrian Tunnel under the Thames";
-    londonLabels[5] = "raindrops on steel";
-    londonLabels[6] = "a rusty boat";
-    londonLabels[7] = "raindrops";
-    londonLabels[8] = "raindrops";
+    textLabels[0] = "sound of a separator";
+    textLabels[1] = "a beer keg swimming on Thames";
+    textLabels[2] = "sound of a chain";
+    textLabels[3] = "jumping on metal surfaces";
+    textLabels[4] = "pedestrian Tunnel under the Thames";
+    textLabels[5] = "raindrops on steel";
+    textLabels[6] = "a rusty boat";
+    textLabels[7] = "raindrops";
+    textLabels[8] = "raindrops";
 
-    londonBg[0] = 140*1.2;
-    londonBg[1] = 190*1.2;
-    londonBg[2] = 140*1.2;
-    londonBg[3] = 170*1.2;
-    londonBg[4] = 210*1.2;
-    londonBg[5] = 140*1.2;
-    londonBg[6] = 140*1.2;
-    londonBg[7] = 140*1.2;
-    londonBg[8] = 140*1.2;
-
+    textLabelsBg[0] = 140*1.2;
+    textLabelsBg[1] = 190*1.2;
+    textLabelsBg[2] = 140*1.2;
+    textLabelsBg[3] = 170*1.2;
+    textLabelsBg[4] = 210*1.2;
+    textLabelsBg[5] = 140*1.2;
+    textLabelsBg[6] = 140*1.2;
+    textLabelsBg[7] = 140*1.2;
+    textLabelsBg[8] = 140*1.2;
+    
     //  Helsinki labels
 
-    helsinkiLabels[0] = "chinese store at the railway station";
-    helsinkiLabels[1] = "rush hour on the train";
-    helsinkiLabels[2] = "skating in front of Kiasma";
-    helsinkiLabels[3] = "metal stairs";
-    helsinkiLabels[4] = "inside the Chapel of Silence";
-    helsinkiLabels[5] = "leaves near the seashore";
-    helsinkiLabels[6] = "metal barrell ( near a submarine, Suomenlinna Island )";
-    helsinkiLabels[7] = "escaping Viking Line ( arrivers from the ship terminal )";
-    
-    helsinkiBg[0] = 200*1.2;
-    helsinkiBg[1] = 190*1.2;
-    helsinkiBg[2] = 150*1.2;
-    helsinkiBg[3] = 120*1.2;
-    helsinkiBg[4] = 210*1.2;
-    helsinkiBg[5] = 200*1.2;
-    helsinkiBg[6] = 300*1.2;
-    helsinkiBg[7] = 300*1.2;
+    textLabels[9] = "chinese store at the railway station";
+    textLabels[10] = "rush hour on the train";
+    textLabels[11] = "skating in front of Kiasma";
+    textLabels[12] = "metal stairs";
+    textLabels[13] = "inside the Chapel of Silence";
+    textLabels[14] = "leaves near the seashore";
+    textLabels[15] = "metal barrell ( near a submarine, Suomenlinna Island )";
+    textLabels[16] = "escaping Viking Line ( arrivers from the ship terminal )";
+
+    textLabelsBg[9] = 200*1.2;
+    textLabelsBg[10] = 190*1.2;
+    textLabelsBg[11] = 150*1.2;
+    textLabelsBg[12] = 120*1.2;
+    textLabelsBg[13] = 210*1.2;
+    textLabelsBg[14] = 200*1.2;
+    textLabelsBg[15] = 300*1.2;
+    textLabelsBg[16] = 300*1.2;
     
     //  Budapest labels
-    //  ...
+    
+    textLabels[17] = "bycicle wheels";
+    textLabels[18] = "overdriven communication tools";
+    textLabels[19] = "emptying recycle bin";
+    textLabels[20] = "metal sighs above the danube";
+    textLabels[21] = "suburban railway lines";
+    textLabels[22] = "sound of a saw";
+    textLabels[23] = "dogs barking in the park";
+    textLabels[24] = "tunnel";
+
+    textLabelsBg[17] = 180*1.2;
+    textLabelsBg[18] = 210*1.2;
+    textLabelsBg[19] = 180*1.2;
+    textLabelsBg[20] = 180*1.2;
+    textLabelsBg[21] = 210*1.2;
+    textLabelsBg[22] = 150*1.2;
+    textLabelsBg[23] = 300*1.2;
+    textLabelsBg[24] = 100*1.2;
 
     //  Kosice labels
-    //  ...
+    
+    textLabels[25] = "fontaine in front of the campus";
+    textLabels[26] = "kitchen at the campus";
+    textLabels[27] = "chainsaw parade";
+    textLabels[28] = "street construction";
+    textLabels[29] = "screwdriver massachre";
+    textLabels[30] = "elders singing in the park";
+    textLabels[31] = "opening doors at the campus";
+    textLabels[32] = "trashbin";
+    textLabels[33] = "painting walls";
+
+    textLabelsBg[25] = 210*1.2;
+    textLabelsBg[26] = 190*1.2;
+    textLabelsBg[27] = 160*1.2;
+    textLabelsBg[28] = 170*1.2;
+    textLabelsBg[29] = 180*1.2;
+    textLabelsBg[30] = 200*1.2;
+    textLabelsBg[31] = 200*1.2;
+    textLabelsBg[32] = 120*1.2;
+    textLabelsBg[33] = 150*1.2;
+    
 
     // Initialize the physics
     physics=new VerletPhysics2D();
@@ -194,8 +238,21 @@ class VerletDisplay
 
       noStroke();
       colorMode(HSB);
-      fill(i*10+40,155,255);
-      ellipse(p.x,p.y,20+(20-abs(dist(p.x,p.y,mouseX,mouseY))/20),20+(20-abs(dist(p.x,p.y,mouseX,mouseY))/20));
+      
+      if(LOCATION==0)fill(i*10+40,155,255);
+      if(LOCATION==1)fill(i*10+90,155,255);
+      if(LOCATION==2)fill(i*10+140,155,255);
+      if(LOCATION==3)fill(i*10+190,155,255);
+      
+    if(selected!=null)
+      {
+        ellipse(p.x,p.y,20+(20-abs(dist(p.x,p.y,selected.x,selected.y))/15),20+(20-abs(dist(p.x,p.y,selected.x,selected.y))/15));
+      }
+      else
+      {
+          ellipse(p.x,p.y,20+(20-abs(dist(p.x,p.y,mouseX,mouseY))/20),20+(20-abs(dist(p.x,p.y,mouseX,mouseY))/20));
+      
+      }
       colorMode(RGB);
 
       // selected particle 
@@ -223,9 +280,7 @@ class VerletDisplay
         ellipse(p.x,p.y,60,60);
       }
     }
-    // display info on each node
-    displayHelsinkiLabels();
-
+    
     //  calculate & pass actual distances
     getNodeDistances();
   }
@@ -338,7 +393,7 @@ class VerletDisplay
 
   //---------------------------------------------------------------------------------------------------------------------------------------------    
 
-  void displayLondonLabels()
+  void displayLabels(int labelOffset)
   {
     noStroke();
 
@@ -347,45 +402,26 @@ class VerletDisplay
     textAlign(LEFT);
     textFont(labelFont);
 
-    for (int i=0; i< NUMBER_OF_NODES; i++)
+    for (int i=labelOffset; i< NUM_OF_SOUNDS_TO_PLAY+labelOffset; i++)
     {
-      fill(11.2,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,londonBg[i],20,5,5);
+      fill(11.2,255-dist(mouseX,mouseY,nodeArray[i-labelOffset].x,nodeArray[i-labelOffset].y)*5);
+      rect(nodeArray[i-labelOffset].x+offSet-6,nodeArray[i-labelOffset].y-12,textLabelsBg[i],20,5,5);
       
-      fill(255,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      text(londonLabels[i], nodeArray[i].x+offSet,nodeArray[i].y+3);
+      fill(255,255-dist(mouseX,mouseY,nodeArray[i-labelOffset].x,nodeArray[i-labelOffset].y)*5);
+      text(textLabels[i], nodeArray[i-labelOffset].x+offSet,nodeArray[i-labelOffset].y+3);
     }    
   }
 
-  void displayHelsinkiLabels()
-  {
-    noStroke();
-
-    //  label positioning from node center
-    int offSet = 20;
-    textAlign(LEFT);
-    textFont(labelFont);
-
-    for (int i=0; i< NUMBER_OF_NODES; i++)
-    {
-      fill(10,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*8);
-      rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,helsinkiBg[i],20,5,5);
-      
-      fill(255,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      text(helsinkiLabels[i], nodeArray[i].x+offSet,nodeArray[i].y+3);
-    }    
-  }
-  
   //  get all node distances from selected particle
   String getNodeDistances()
   {
-    for(int i=0;i<NUMBER_OF_NODES;i++)
+    for(int i=0;i<NUM_OF_SOUNDS_TO_PLAY;i++)
     {
       if (selected==nodeArray[i])
       {
           //  str2return = allDistances[i][reader.currentRow];  // this is returning values based on the saved datalog file   
           //  this method gives back actual geometric distances based on the simulation
-          for(int j = 0; j< NUMBER_OF_NODES; j++)
+          for(int j = 0; j< NUM_OF_SOUNDS_TO_PLAY; j++)
           {
             tmpDistances[j] = dist(nodeArray[i].x,nodeArray[i].y,nodeArray[j].x,nodeArray[j].y); 
           }

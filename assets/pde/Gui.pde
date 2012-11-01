@@ -23,6 +23,7 @@ class Gui
   void loadingAnimation()
   {
     fill(0);
+    noStroke();
     rect(width/2-120,height/2-15,240,25,20,20,20,20);
     fill(255);
     textAlign(CENTER);
@@ -30,7 +31,7 @@ class Gui
       
     text("please wait... the sounds are loading",width/2,height/2);
     fill(100,200);
-    text(NUM_OF_SOUNDS-loadCount + " sounds are remaining...",width/2,height/2+50);
+    text(NUM_OF_SOUNDS_TO_LOAD-loadCount + " sounds are remaining...",width/2,height/2+50);
     textAlign(LEFT);
   }
   
@@ -98,37 +99,62 @@ class Gui
     stroke(255,255-dist(mouseX,mouseY,xPos,yPos)*3);
     fill(255,255-dist(mouseX,mouseY,xPos,yPos)*3);
     text(name,xPos,yPos+3);
-
   }
 
   void pressed(int xPos, int yPos)
   {
-    if(dist(mouseX,mouseY,xPos,yPos)<30)
+
+    if(xPos>(width-myMap.width))
     {
-      if(mouseY > 200)
-      {
-        console.log("Budapest!");
-        LOCATION = 2;
-      }
+        if(mouseY > 200 && mouseY < 250)
+        {
+          console.log("Budapest!");
+          muteSounds();
+          resetFilters();
+          LOCATION = 2;
+          NUM_OF_SOUNDS_TO_PLAY = 8;
+          arrayOffset = 17;
+          playSounds(17);        
+          
+        }
 
-      if((mouseY > 185) && (mouseY < 200))
-      {
-        console.log("KOSICE!");
-        LOCATION = 3;
-      }
+        if((mouseY > 185) && (mouseY < 200))
+        {
+          console.log("KOSICE!");
+          muteSounds();
+          resetFilters();
+          LOCATION = 3;
+          NUM_OF_SOUNDS_TO_PLAY = 9;
+          arrayOffset = 25;
+          playSounds(25);
+          
+        }
 
-      if((mouseY > 165) && (mouseY < 180))
-      {
-        console.log("LONDON");
-        LOCATION = 0;
-      }
+        if((mouseY > 165) && (mouseY < 180))
+        {
+          console.log("LONDON!");
+          muteSounds();
+          resetFilters();
+          LOCATION = 0;
+          NUM_OF_SOUNDS_TO_PLAY = 9;
+          arrayOffset = 0;
+          playSounds(0);
+          
+        }
 
-      if(mouseY < 100)
-      {
-        console.log("HELSINKI!");
-        LOCATION = 1;
-      }
-   }  
+        if(mouseY < 100 && mouseY > 70)
+        {
+          console.log("HELSINKI!");
+          muteSounds();
+          resetFilters();
+          LOCATION = 1;
+          NUM_OF_SOUNDS_TO_PLAY = 8;
+          arrayOffset = 9;
+          playSounds(9);
+          
+        }
+      
+    }  
   }
 
   void displaySelected()

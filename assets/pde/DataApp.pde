@@ -23,10 +23,11 @@ VerletDisplay verletdisplay;
 Gui gui;
 
 
-int NUMBER_OF_NODES;
+int NUMBER_OF_NODES; 
+int MAX_NUMBER_OF_NODES;
 
 //  0 = london, 1 = helsinki, 2 = budapest, 3 = kosice
-int LOCATION = 1; 
+int LOCATION = 0; 
 
 String[] allDistances[];
 String allSplit[][];
@@ -43,9 +44,11 @@ boolean loaded = true;
 void setup()
 {
   size(screen.width,600);
+  frameRate(20);
   //  set number of nodes
   
   NUMBER_OF_NODES = 8;
+  MAX_NUMBER_OF_NODES = 9;
   
   //reader = new DataReader();
   verletdisplay = new VerletDisplay();
@@ -58,12 +61,6 @@ void setup()
 void draw()
 {
   gui.showDefault();
-  gui.displayMap();
-
-  if(LOCATION==0) gui.showCityName("LONDON");
-  if(LOCATION==1) gui.showCityName("HELSINKI");
-  if(LOCATION==2) gui.showCityName("BUDAPEST");
-  if(LOCATION==3) gui.showCityName("KOSICE");
   
   if(isLoaded==0)
   {
@@ -71,7 +68,15 @@ void draw()
   }
   if(isLoaded==1)
   {
+    gui.displayMap();
+
+    if(LOCATION==0) gui.showCityName("LONDON");
+    if(LOCATION==1) gui.showCityName("HELSINKI");
+    if(LOCATION==2) gui.showCityName("BUDAPEST");
+    if(LOCATION==3) gui.showCityName("KOSICE");
+
     verletdisplay.draw();
+    verletdisplay.displayLabels(arrayOffset);
     gui.showIntroText();
     
     pointerPosX = mouseX;
