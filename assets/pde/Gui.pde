@@ -36,7 +36,7 @@ class Gui
   
   void showDefault()
   {
-      background(235);
+      background(50);
       fill(200,100);
       textAlign(RIGHT);
       textFont(normalFont);
@@ -47,7 +47,7 @@ class Gui
   void showCityName(String n)
   {   
       textAlign(LEFT);
-      fill(255,100);
+      fill(255,20);
       textFont(largeCityfont);
       text(n,10,50); 
   }
@@ -75,6 +75,7 @@ class Gui
 
     textAlign(RIGHT);
     textFont(normalFont);
+    fill(150);
     text("SELECT CITY TO CHANGE LOCATION", width-30, myMap.height+15);
 
     selectCities("BUDAPEST",width-myMap.width+185,205);
@@ -94,8 +95,8 @@ class Gui
     rectMode(CORNER);
     textAlign(CENTER);
     textFont(smallCityfont);
-    stroke(255,255-dist(mouseX,mouseY,xPos,yPos)*2);
-    fill(255,255-dist(mouseX,mouseY,xPos,yPos)*2);
+    stroke(255,255-dist(mouseX,mouseY,xPos,yPos)*3);
+    fill(255,255-dist(mouseX,mouseY,xPos,yPos)*3);
     text(name,xPos,yPos+3);
 
   }

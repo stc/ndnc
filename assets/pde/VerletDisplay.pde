@@ -63,7 +63,7 @@ class VerletDisplay
   VerletDisplay() 
   {
 
-    labelFont = createFont("Arial",36);
+    labelFont = createFont("Arial",14);
     
     //  London labels
 
@@ -77,15 +77,15 @@ class VerletDisplay
     londonLabels[7] = "raindrops";
     londonLabels[8] = "raindrops";
 
-    londonBg[0] = 140*3;
-    londonBg[1] = 190*3;
-    londonBg[2] = 140*3;
-    londonBg[3] = 170*3;
-    londonBg[4] = 210*3;
-    londonBg[5] = 140*3;
-    londonBg[6] = 140*3;
-    londonBg[7] = 140*3;
-    londonBg[8] = 140*3;
+    londonBg[0] = 140*1.2;
+    londonBg[1] = 190*1.2;
+    londonBg[2] = 140*1.2;
+    londonBg[3] = 170*1.2;
+    londonBg[4] = 210*1.2;
+    londonBg[5] = 140*1.2;
+    londonBg[6] = 140*1.2;
+    londonBg[7] = 140*1.2;
+    londonBg[8] = 140*1.2;
 
     //  Helsinki labels
 
@@ -98,14 +98,14 @@ class VerletDisplay
     helsinkiLabels[6] = "metal barrell ( near a submarine, Suomenlinna Island )";
     helsinkiLabels[7] = "escaping Viking Line ( arrivers from the ship terminal )";
     
-    helsinkiBg[0] = 200*3;
-    helsinkiBg[1] = 190*3;
-    helsinkiBg[2] = 150*3;
-    helsinkiBg[3] = 120*3;
-    helsinkiBg[4] = 210*3;
-    helsinkiBg[5] = 200*3;
-    helsinkiBg[6] = 300*3;
-    helsinkiBg[7] = 300*3;
+    helsinkiBg[0] = 200*1.2;
+    helsinkiBg[1] = 190*1.2;
+    helsinkiBg[2] = 150*1.2;
+    helsinkiBg[3] = 120*1.2;
+    helsinkiBg[4] = 210*1.2;
+    helsinkiBg[5] = 200*1.2;
+    helsinkiBg[6] = 300*1.2;
+    helsinkiBg[7] = 300*1.2;
     
     //  Budapest labels
     //  ...
@@ -182,7 +182,7 @@ class VerletDisplay
     {
       VerletSpring2D s = physics.springs[i];
       strokeWeight(2);
-      stroke(dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.5,dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.8,dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.3,200-dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.8);
+      stroke(dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.5,dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.8,dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.3,200-dist(s.a.x,s.a.y,s.b.x,s.b.y)*0.5);
       line(s.a.x,s.a.y,s.b.x,s.b.y);
     }
 
@@ -195,9 +195,8 @@ class VerletDisplay
       noStroke();
       colorMode(HSB);
       fill(i*10+40,155,255);
-      ellipse(p.x,p.y,40,40);
+      ellipse(p.x,p.y,20+(20-abs(dist(p.x,p.y,mouseX,mouseY))/20),20+(20-abs(dist(p.x,p.y,mouseX,mouseY))/20));
       colorMode(RGB);
-
 
       // selected particle 
       fill(0x99ffffff);
@@ -350,11 +349,11 @@ class VerletDisplay
 
     for (int i=0; i< NUMBER_OF_NODES; i++)
     {
-      fill(60,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,londonBg[i],15,5,5);
+      fill(11.2,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
+      rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,londonBg[i],20,5,5);
       
       fill(255,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      text(londonLabels[i], nodeArray[i].x+offSet,nodeArray[i].y);
+      text(londonLabels[i], nodeArray[i].x+offSet,nodeArray[i].y+3);
     }    
   }
 
@@ -369,11 +368,11 @@ class VerletDisplay
 
     for (int i=0; i< NUMBER_OF_NODES; i++)
     {
-      fill(160,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*8);
-      //rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,helsinkiBg[i],30,5,5);
+      fill(10,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*8);
+      rect(nodeArray[i].x+offSet-6,nodeArray[i].y-12,helsinkiBg[i],20,5,5);
       
       fill(255,255-dist(mouseX,mouseY,nodeArray[i].x,nodeArray[i].y)*5);
-      text(helsinkiLabels[i], nodeArray[i].x+offSet,nodeArray[i].y);
+      text(helsinkiLabels[i], nodeArray[i].x+offSet,nodeArray[i].y+3);
     }    
   }
   
