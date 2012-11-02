@@ -24,6 +24,9 @@
 		
 		<script type="text/javascript">
 
+			//	global variable for dat.gui to be accessed later..
+			var gui;
+
 			var isLoaded = 0;
 
 			//	global variables to be controlled by datGui (& passed to the processing sketch)
@@ -99,14 +102,29 @@
     			if(!bound) setTimeout(bindJavascript, 250);
   			}
   			bindJavascript();
+
+  			var c =0;
+  			function swap()
+			{
+					if (c==0)
+					{
+						document.getElementById('sndPx').src="./assets/pix/sndOff.png";
+						muteSounds();
+						c++;
+					}
+					else if(c==1)
+					{
+						document.getElementById('sndPx').src="./assets/pix/sndOn.png";
+						playSounds(arrayOffset);
+						c--;
+					}
+			}
+  			
 		</script>
 	</head>
 
-	<body onload="initAll();for(var i=0;i<NUM_OF_SOUNDS_TO_LOAD;i++){loadSoundFiles(i);} var gui = new dat.GUI();
-			{
- 			 height : 5 * 32 - 1;
- 			}
-  			
+	<body onload="initAll();for(var i=0;i<NUM_OF_SOUNDS_TO_LOAD;i++){loadSoundFiles(i);} gui = new dat.GUI();
+			
   			gui.add(params, 'strength').min(0.0000001).max(0.01).step(0.0000001).onChange(function(value)
   			{
     			// refresh based on the new value of params.interation
@@ -117,7 +135,8 @@
   			{
     			console.log(' scale: ' + value);
   			});
-  			 gui.closed = true;">
+  			 gui.closed = true;
+			">
 
 		
 		
@@ -135,6 +154,10 @@
 		</div>
 		<div id= "scrollUp">
 			LESS
+		</div>
+
+		<div id="switchSound" onclick="swap();"> 
+			<img src="./assets/pix/sndOn.png" id="sndPx" />
 		</div>
 
 		<div id="content">
@@ -160,16 +183,20 @@
 			</br>
 		</div>		
 		<script>
+
+
 			$(document).ready(function() 
 			{
 				$('#scrollDown').click(function() 
 				{
-					$.scrollTo( '#content', 900, {easing:'swing'} );	  
+					$.scrollTo( '#content', 900, {easing:'swing'} );
+					gui.domElement.style.opacity=0;  
 				});
 
 				$('#scrollUp').click(function() 
 				{
-					$.scrollTo( '0', 900, {easing:'swing'} );	  
+					$.scrollTo( '0', 900, {easing:'swing'} );
+					gui.domElement.style.opacity=1; 	  
 				});
 			});
 		</script>

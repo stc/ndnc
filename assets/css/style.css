@@ -79,7 +79,7 @@ highlight
 #scrollDown
 {
     width:10%;
-    background-color:#000;
+    background-color:#282828;
     border-radius: 100px 100px 0px 0px;
     moz-border-radius:100px 100px 0px 0px;
     padding:5px 5px 0px 0px;
@@ -94,7 +94,7 @@ highlight
 
 #scrollDown:hover
 {
-    background-color:#395c58;
+    background-color:#394042;
 }
 
 #scrollUp
@@ -117,7 +117,23 @@ highlight
 
 #scrollUp:hover
 {
-    background-color:#395c58;
+    background-color:#394042;
+}
+
+#switchSound
+{
+    position:absolute;
+    top:0px;
+    left:10px;
+    width:40px;
+    height:40px;
+    opacity:0.4;
+}
+
+#switchSound:hover
+{
+    opacity:1;
+    cursor: pointer;
 }
     
 #content 
