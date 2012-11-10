@@ -212,7 +212,7 @@ class VerletDisplay
     // updateStringsWithData();
     // println(londonLabels[0]);
     // set springlength using noise
-    updateStringsWithNoise();
+    //  updateStringsWithNoise();
 
     //  update params based on gui
     updateWithGui()
